@@ -1,12 +1,15 @@
 {
   "name": "calc-units",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An CSS-like implementation of calc for Javascript",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rollup -c",
+    "prepublish": "rollup -c",
     "watch": "rollup -c -w",
     "test": "jest"
   },
