@@ -11,6 +11,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 const CALC_EXPR = /^calc\((.+)\)$/;
 const isCalc = (calcExpr) => !CALC_EXPR.test(calcExpr);
+const isNumber = (n) => {
+    return typeof n === "number";
+};
 const processCalcArray = (values, calcExpr) => {
     values.forEach((v, index) => {
         if (v === "-")
@@ -47,7 +50,7 @@ const processCalcArray = (values, calcExpr) => {
     });
     const result = values
         .filter(v => v !== "*" && v !== "/")
-        .map(n => Number(n))
+        .filter(isNumber)
         .reduce((x, y) => x + y, 0);
     return result;
 };
@@ -89,7 +92,7 @@ const processParentheses = (valueArray, calcExpr) => {
     }
     return processCalcArray(withParenthesesDone, calcExpr);
 };
-var index = (calcExpr, parseValue) => {
+function calcUnits(calcExpr, parseValue) {
     if (!CALC_EXPR.test(calcExpr)) {
         console.warn(`Not a valid calc expression "${calcExpr}"`);
         return 0;
@@ -119,8 +122,9 @@ var index = (calcExpr, parseValue) => {
         return parseValue(v);
     });
     return processParentheses(parsedValues, calcExpr);
-};
+}
+//# sourceMappingURL=index.js.map
 
 exports.CALC_EXPR = CALC_EXPR;
-exports.default = index;
+exports.default = calcUnits;
 exports.isCalc = isCalc;

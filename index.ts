@@ -4,6 +4,10 @@ export const isCalc = (calcExpr: string): boolean => !CALC_EXPR.test(calcExpr);
 
 type Value = string | number;
 
+const isNumber = (n: string | number): n is number => {
+  return typeof n === "number";
+};
+
 const processCalcArray = (values: Value[], calcExpr: string): number => {
   values.forEach((v, index) => {
     if (v === "-") values[index + 1] = -values[index + 1];
@@ -40,7 +44,7 @@ const processCalcArray = (values: Value[], calcExpr: string): number => {
   });
   const result = values
     .filter(v => v !== "*" && v !== "/")
-    .map(n => Number(n))
+    .filter(isNumber)
     .reduce((x, y) => x + y, 0);
   return result;
 };
@@ -81,7 +85,10 @@ const processParentheses = (valueArray: Value[], calcExpr: string): number => {
   return processCalcArray(withParenthesesDone, calcExpr);
 };
 
-export default (calcExpr: string, parseValue: (n: string) => number) => {
+export default function calcUnits(
+  calcExpr: string,
+  parseValue: (n: string) => number
+): number {
   if (!CALC_EXPR.test(calcExpr)) {
     console.warn(`Not a valid calc expression "${calcExpr}"`);
     return 0;
@@ -115,4 +122,4 @@ export default (calcExpr: string, parseValue: (n: string) => number) => {
   });
 
   return processParentheses(parsedValues, calcExpr);
-};
+}
