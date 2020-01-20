@@ -28,7 +28,7 @@ export default {
       format: "es"
     },
     {
-      file: pkg.browser,
+      file: "dist/index.bundle.js",
       exports: "named",
       format: "iife",
       name: "calcUnits"

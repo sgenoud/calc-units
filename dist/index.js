@@ -1,9 +1,13 @@
 /**
  * calc-units
- * v1.0.0 (2020-01-17T09:25:10.061Z) 
+ * v0.1.0 (2020-01-20T08:14:11.556Z) 
  * 2019-2020 Steve Genoud
  * 
  */
+
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
 
 const CALC_EXPR = /^calc\((.+)\)$/;
 const isCalc = (calcExpr) => !CALC_EXPR.test(calcExpr);
@@ -117,5 +121,6 @@ var index = (calcExpr, parseValue) => {
     return processParentheses(parsedValues, calcExpr);
 };
 
-export default index;
-export { CALC_EXPR, isCalc };
+exports.CALC_EXPR = CALC_EXPR;
+exports.default = index;
+exports.isCalc = isCalc;
